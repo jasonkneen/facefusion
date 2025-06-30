@@ -4,7 +4,7 @@ WORDING : Dict[str, Any] =\
 {
 	'conda_not_activated': 'Conda is not activated',
 	'python_not_supported': 'Python version is not supported, upgrade to {version} or higher',
-	'curl_not_installed': 'CURL is not installed',
+	'curl_not_installed': 'cURL is not installed',
 	'ffmpeg_not_installed': 'FFMpeg is not installed',
 	'creating_temp': 'Creating temporary resources',
 	'extracting_frames': 'Extracting frames with a resolution of {resolution} and {fps} frames per second',
@@ -129,24 +129,26 @@ WORDING : Dict[str, Any] =\
 		'face_occluder_model': 'choose the model responsible for the occlusion mask',
 		'face_parser_model': 'choose the model responsible for the region mask',
 		'face_mask_types': 'mix and match different face mask types (choices: {choices})',
+		'face_mask_areas': 'choose the items used for the area mask (choices: {choices})',
+		'face_mask_regions': 'choose the items used for the region mask (choices: {choices})',
 		'face_mask_blur': 'specify the degree of blur applied to the box mask',
 		'face_mask_padding': 'apply top, right, bottom and left padding to the box mask',
-		'face_mask_regions': 'choose the facial features used for the region mask (choices: {choices})',
 		# frame extraction
 		'trim_frame_start': 'specify the starting frame of the target video',
 		'trim_frame_end': 'specify the ending frame of the target video',
 		'temp_frame_format': 'specify the temporary resources format',
 		'keep_temp': 'keep the temporary resources after processing',
 		# output creation
-		'output_image_quality': 'specify the image quality which translates to the compression factor',
-		'output_image_resolution': 'specify the image output resolution based on the target image',
-		'output_audio_encoder': 'specify the encoder used for the audio output',
-		'output_video_encoder': 'specify the encoder used for the video output',
+		'output_image_quality': 'specify the image quality which translates to the image compression',
+		'output_image_resolution': 'specify the image resolution based on the target image',
+		'output_audio_encoder': 'specify the encoder used for the audio',
+		'output_audio_quality': 'specify the audio quality which translates to the audio compression',
+		'output_audio_volume': 'specify the audio volume based on the target video',
+		'output_video_encoder': 'specify the encoder used for the video',
 		'output_video_preset': 'balance fast video processing and video file size',
-		'output_video_quality': 'specify the video quality which translates to the compression factor',
-		'output_video_resolution': 'specify the video output resolution based on the target video',
-		'output_video_fps': 'specify the video output fps based on the target video',
-		'skip_audio': 'omit the audio from the target video',
+		'output_video_quality': 'specify the video quality which translates to the video compression',
+		'output_video_resolution': 'specify the video resolution based on the target video',
+		'output_video_fps': 'specify the video fps based on the target video',
 		# processors
 		'processors': 'load a single or multiple processors (choices: {choices}, ...)',
 		'age_modifier_model': 'choose the model responsible for aging the face',
@@ -182,28 +184,34 @@ WORDING : Dict[str, Any] =\
 		'frame_enhancer_model': 'choose the model responsible for enhancing the frame',
 		'frame_enhancer_blend': 'blend the enhanced into the previous frame',
 		'lip_syncer_model': 'choose the model responsible for syncing the lips',
+		'lip_syncer_weight': 'specify the degree of weight applied to the lips',
 		# uis
 		'open_browser': 'open the browser once the program is ready',
 		'ui_layouts': 'launch a single or multiple UI layouts (choices: {choices}, ...)',
 		'ui_workflow': 'choose the ui workflow',
+		# download
+		'download_providers': 'download using different providers (choices: {choices}, ...)',
+		'download_scope': 'specify the download scope',
+		# benchmark
+		'benchmark_resolutions': 'choose the resolutions for the benchmarks (choices: {choices}, ...)',
+		'benchmark_cycle_count': 'specify the amount of cycles per benchmark',
 		# execution
 		'execution_device_id': 'specify the device used for processing',
 		'execution_providers': 'inference using different providers (choices: {choices}, ...)',
 		'execution_thread_count': 'specify the amount of parallel threads while processing',
 		'execution_queue_count': 'specify the amount of frames each thread is processing',
-		# download
-		'download_providers': 'download using different providers (choices: {choices}, ...)',
-		'download_scope': 'specify the download scope',
 		# memory
 		'video_memory_strategy': 'balance fast processing and low VRAM usage',
 		'system_memory_limit': 'limit the available RAM that can be used while processing',
 		# misc
 		'log_level': 'adjust the message severity displayed in the terminal',
+		'halt_on_error': 'halt the program once an error occurred',
 		# run
 		'run': 'run the program',
 		'headless_run': 'run the program in headless mode',
 		'batch_run': 'run the program in batch mode',
 		'force_download': 'force automate downloads and exit',
+		'benchmark': 'benchmark the program',
 		# jobs
 		'job_id': 'specify the job id',
 		'job_status': 'specify the job status',
@@ -236,8 +244,8 @@ WORDING : Dict[str, Any] =\
 		'age_modifier_direction_slider': 'AGE MODIFIER DIRECTION',
 		'age_modifier_model_dropdown': 'AGE MODIFIER MODEL',
 		'apply_button': 'APPLY',
-		'benchmark_cycles_slider': 'BENCHMARK CYCLES',
-		'benchmark_runs_checkbox_group': 'BENCHMARK RUNS',
+		'benchmark_cycle_count_slider': 'BENCHMARK CYCLE COUNT',
+		'benchmark_resolutions_checkbox_group': 'BENCHMARK RESOLUTIONS',
 		'clear_button': 'CLEAR',
 		'common_options_checkbox_group': 'OPTIONS',
 		'download_providers_checkbox_group': 'DOWNLOAD PROVIDERS',
@@ -278,6 +286,7 @@ WORDING : Dict[str, Any] =\
 		'face_mask_padding_left_slider': 'FACE MASK PADDING LEFT',
 		'face_mask_padding_right_slider': 'FACE MASK PADDING RIGHT',
 		'face_mask_padding_top_slider': 'FACE MASK PADDING TOP',
+		'face_mask_areas_checkbox_group': 'FACE MASK AREAS',
 		'face_mask_regions_checkbox_group': 'FACE MASK REGIONS',
 		'face_mask_types_checkbox_group': 'FACE MASK TYPES',
 		'face_selector_age_range_slider': 'FACE SELECTOR AGE',
@@ -301,8 +310,11 @@ WORDING : Dict[str, Any] =\
 		'job_runner_job_action_dropdown': 'JOB ACTION',
 		'job_runner_job_id_dropdown': 'JOB ID',
 		'lip_syncer_model_dropdown': 'LIP SYNCER MODEL',
+		'lip_syncer_weight_slider': 'LIP SYNCER WEIGHT',
 		'log_level_dropdown': 'LOG LEVEL',
 		'output_audio_encoder_dropdown': 'OUTPUT AUDIO ENCODER',
+		'output_audio_quality_slider': 'OUTPUT AUDIO QUALITY',
+		'output_audio_volume_slider': 'OUTPUT AUDIO VOLUME',
 		'output_image_or_video': 'OUTPUT',
 		'output_image_quality_slider': 'OUTPUT IMAGE QUALITY',
 		'output_image_resolution_dropdown': 'OUTPUT IMAGE RESOLUTION',
@@ -337,11 +349,13 @@ WORDING : Dict[str, Any] =\
 }
 
 
-def get(key : str) -> Optional[str]:
-	if '.' in key:
-		section, name = key.split('.')
-		if section in WORDING and name in WORDING.get(section):
-			return WORDING.get(section).get(name)
-	if key in WORDING:
-		return WORDING.get(key)
+def get(notation : str) -> Optional[str]:
+	current = WORDING
+
+	for fragment in notation.split('.'):
+		if fragment in current:
+			current = current.get(fragment)
+			if isinstance(current, str):
+				return current
+
 	return None
